@@ -5,6 +5,7 @@ register = template.Library()
 
 SCRIPT_TAG = '<script src="%sjs/bootstrap-%s.js" type="text/javascript"></script>'
 
+
 class BootstrapJSNode(template.Node):
 
     def __init__(self, args):
@@ -30,16 +31,18 @@ class BootstrapJSNode(template.Node):
             # popover requires twipsy
             if 'popover' in self.args:
                 self.args.add('twipsy')
-            tags = [SCRIPT_TAG % (settings.STATIC_URL,tag) for tag in self.args]
+            tags = [SCRIPT_TAG % (settings.STATIC_URL, tag) for tag in self.args]
             return '\n'.join(tags)
+
 
 @register.simple_tag
 def bootstrap_custom_less(less):
-    output=[
+    output = [
             '<link rel="stylesheet/less" type="text/css" href="%s%s" media="all">' % (settings.STATIC_URL, less),
             '<script src="%sjs/less-1.1.5.min.js" type="text/javascript"></script>' % settings.STATIC_URL,
         ]
     return '\n'.join(output)
+
 
 @register.simple_tag
 def bootstrap_css():
@@ -48,13 +51,15 @@ def bootstrap_css():
     else:
         return '<link rel="stylesheet" type="text/css" href="%sbootstrap.min.css">' % settings.STATIC_URL
 
+
 @register.simple_tag
 def bootstrap_less():
-    output=[
+    output = [
             '<link rel="stylesheet/less" type="text/css" href="%slib/bootstrap.less">' % settings.STATIC_URL,
             '<script src="%sless.js" type="text/javascript"></script>' % settings.STATIC_URL,
         ]
     return '\n'.join(output)
+
 
 @register.tag(name='bootstrap_js')
 def do_bootstrap_js(parser, token):
