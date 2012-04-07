@@ -37,7 +37,7 @@ This application exposes a few template tags for including the Bootstrap toolkit
 
 Load the template tags before usage::
 
-    {% load bootstrap %}
+    {% load bootstrapped %}
 
 ```bootstrap_css```
 
